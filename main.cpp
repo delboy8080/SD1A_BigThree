@@ -49,58 +49,75 @@ RULE:  (The Rule of Three)
  */
 #include<iostream>
 #include "student.h"
-using namespace std;
+#include "Rectangle.h"
 
+int defaultMain();
+
+using namespace std;
+void printRectangle(Rectangle rect)
+{
+    cout << rect;
+}
 int main()
 {
-	cout << "Creating Student object s1" << endl;
-	Student s1("Tom", 54.10324, -6.41667);		// Normal constructor is called here
-	cout << "s1 = " << endl;
-	//s1.printStudent();
+    //defaultMain();
+    Rectangle rect;
+    printRectangle(rect);
+
+    cout << rect;
+
+    return 0;
+
+    //TODO - study the output, and note the calls to the destructor ~Student() as each
+	// object goes out of scope. Can you account for each destructor call.
+}
+
+int defaultMain() {
+    cout << "Creating Student object s1" << endl;
+    Student s1("Tom", 54.10324, -6.41667);        // Normal constructor is called here
+    cout << "s1 = " << endl;
+    //s1.printStudent();
     cout << s1 << endl;
 
-	Student s2(s1); // calls copy constructor to initialize s2 fields from s1 fields
-	cout << "Student s2(s1); calls the Copy constructor, so s2 = ";
-	s2.printStudent();
+    Student s2(s1); // calls copy constructor to initialize s2 fields from s1 fields
+    cout << "Student s2(s1); calls the Copy constructor, so s2 = ";
+    s2.printStudent();
 
-	cout << "Changing location in s1." << endl;
-	s1.setLocation(77.77777, 88.88888);	// change the location fields of s1
-	cout << "s1 = ";
-	s1.printStudent();
+    cout << "Changing location in s1." << endl;
+    s1.setLocation(77.77777, 88.88888);    // change the location fields of s1
+    cout << "s1 = ";
+    s1.printStudent();
 
-	Student s3 = s1; // also calls copy constructor (and NOT the assignment operator !!)
-	cout << "Student s3 = s1;  - calls Copy Constructor, so s3 = ";
-	s3.printStudent();
+    Student s3 = s1; // also calls copy constructor (and NOT the assignment operator !!)
+    cout << "Student s3 = s1;  - calls Copy Constructor, so s3 = ";
+    s3.printStudent();
 
-	Student s4;
-	s4 = s1;			// overloaded assignment operator= is called in this case, (s4 has already been constructed)
-	cout << "s4 = s1; calls overloaded assignment operator= , so s4 = ";
-	s4.printStudent();
+    Student s4;
+    s4 = s1;            // overloaded assignment operator= is called in this case, (s4 has already been constructed)
+    cout << "s4 = s1; calls overloaded assignment operator= , so s4 = ";
+    s4.printStudent();
 
-	// chaining of assignments is allowed (this is why we return "*this" from the overloaded "operator=" )
-	// s4 = s3 = s2 = s1;  // sets them all to value of s1
+    // chaining of assignments is allowed (this is why we return "*this" from the overloaded "operator=" )
+// s4 = s3 = s2 = s1;  // sets them all to value of s1
 
     cout << "Using stream insertion operator>> for Student:";
     Student s5;
     cin >> s5;
     cout << "Print s5:\n " << s5 << endl;
 
-	Student* pStudent = new Student("Jane", 54.10324, -6.41667);  // dynamically allocate object
+    Student* pStudent = new Student("Jane", 54.10324, -6.41667);  // dynamically allocate object
 
-	pStudent->printStudent();
+    pStudent->printStudent();
 
     cout << "Print the dynamically allocate student using *pStudent: " << *pStudent << endl;
 
-	delete pStudent;	// free up dynamically allocated student,
-                        // ~Student() destructor is called when we delete the student memory
-	pStudent = nullptr;
+    delete pStudent;    // free up dynamically allocated student,
+// ~Student() destructor is called when we delete the student memory
+    pStudent = nullptr;
 
     // On return , the Students objects that were automatically created on the stack
-    // are now automatically removed from the stack. The destructor for each Student
-    // object is called just before it is removed.
+// are now automatically removed from the stack. The destructor for each Student
+// object is called just before it is removed.
 
-	return 0;
-
-	//TODO - study the output, and note the calls to the destructor ~Student() as each
-	// object goes out of scope. Can you account for each destructor call.
+    return 0;
 }

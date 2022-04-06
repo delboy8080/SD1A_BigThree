@@ -3,4 +3,4 @@ project(sam14_Big_Three)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(sam14_Big_Three main.cpp Student.cpp Student.h)
+add_executable(sam14_Big_Three main.cpp Student.cpp Student.h Rectangle.cpp Rectangle.h)

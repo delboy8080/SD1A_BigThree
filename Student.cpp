@@ -37,11 +37,13 @@ Student::Student(const Student &source) {
     cout << "... Student Copy Constructor was called." << endl;
     this->name = source.name;
 
+
     this->location = new double[2];    // dynamically allocate a new block of memory
     // to hold a copy of the location data
 
     this->location[0] = source.location[0];    // copy the location data
     this->location[1] = source.location[1];
+
 }
 
 void Student::printStudent() {
@@ -131,4 +133,5 @@ istream& operator>> (istream& in, Student& student)
     cout << "Enter location longitude: ";
     cin >> student.location[1];
     cout << endl;
+    return in;
 }
